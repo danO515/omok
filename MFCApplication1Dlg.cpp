@@ -237,7 +237,7 @@ void CMFCApplication1Dlg::OnLButtonDown(UINT nFlags, CPoint point)
 
 			if (count_W[0] + count_W[7] >= 4 || count_W[1] + count_W[6] >= 4 ||
 				count_W[2] + count_W[5] >= 4 || count_W[3] + count_W[4] >= 4) {
-				MessageBox("백 승리");
+				MessageBox("백 승리"); //끝
 			}
 
 		}
