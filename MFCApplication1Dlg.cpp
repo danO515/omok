@@ -237,7 +237,7 @@ void CMFCApplication1Dlg::OnLButtonDown(UINT nFlags, CPoint point)
 				}
 
 				count_W[i] = winpoint_W;
-			}
+			} //가나다라
 
 			/*
 			char szText[100];
