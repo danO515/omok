@@ -215,18 +215,19 @@ void CMFCApplication1Dlg::OnLButtonDown(UINT nFlags, CPoint point)
 			int count_W[8] = {};
 			int xx = 0;
 			int yy = 0;
+			int winpoint_W = 0;
 
 			for (int i = 0; i < 8; i++) {
 
 				winpoint_W = 0;
 				a = direction_check[i][0];
 				b = direction_check[i][1];
-				
+
 				xx = x + a;
 				yy = y + b;
 
 
-				while (	coordinate_filled[yy][xx] != 0 || coordinate_filled[yy][xx] != 2 )
+				while (coordinate_filled[yy][xx] != 0 && coordinate_filled[yy][xx] != 2)
 				{
 					if (yy <= 0 || xx <= 0 || yy >= 14 || xx >= 14)
 						break;
@@ -237,7 +238,7 @@ void CMFCApplication1Dlg::OnLButtonDown(UINT nFlags, CPoint point)
 				}
 
 				count_W[i] = winpoint_W;
-			} //가나다라
+			}
 
 			/*
 			char szText[100];
@@ -262,6 +263,36 @@ void CMFCApplication1Dlg::OnLButtonDown(UINT nFlags, CPoint point)
 
 			coordinate_filled[y][x] = 2;
 			color = 1;
+
+			int direction_check[8][2] = { {-1,-1}, {-1,0}, {-1,1}, {0,-1}, {0,1}, {1,-1}, {1,0}, {1,1} };
+			int a, b;
+			int count_B[8] = {};
+			int xx = 0;
+			int yy = 0;
+			int winpoint_B = 0;
+
+			for (int i = 0; i < 8; i++) {
+
+				winpoint_B = 0;
+				a = direction_check[i][0];
+				b = direction_check[i][1];
+
+				xx = x + a;
+				yy = y + b;
+
+
+				while (coordinate_filled[yy][xx] != 0 && coordinate_filled[yy][xx] != 2)
+				{
+					if (yy <= 0 || xx <= 0 || yy >= 14 || xx >= 14)
+						break;
+
+					winpoint_B += 1;
+					xx += a;
+					yy += b;
+				}
+
+				count_B[i] = winpoint_B;
+			}
 		}
 	}
 

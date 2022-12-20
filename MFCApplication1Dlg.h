@@ -40,5 +40,4 @@ public:
 	int coordinate_filled[15][15] = {};
 	int check = 0;
 	CDC * DCDefine();
-	int winpoint_W = 0, winpoint_B = 0;
 };
