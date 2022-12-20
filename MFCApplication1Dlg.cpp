@@ -161,7 +161,6 @@ void CMFCApplication1Dlg::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
-
 	CClientDC dc(this);
 
 	CBrush white;
@@ -194,7 +193,11 @@ void CMFCApplication1Dlg::OnLButtonDown(UINT nFlags, CPoint point)
 	StoneDC.CreateCompatibleDC(&dc);
 	StoneDC.SelectObject(&Stone);
 
-	if (on == 1 && point.x % 50 < 40 && point.y % 50 < 40 && coordinate_filled[y][x] == 0 && check == 0) {
+	if (on == 1 &&
+		check == 0 &&
+		coordinate_filled[y][x] == 0 &&
+		point.x % 50 < 40 &&
+		point.y % 50 < 40 ) {
 
 		if (color == 1) {
 
@@ -210,34 +213,42 @@ void CMFCApplication1Dlg::OnLButtonDown(UINT nFlags, CPoint point)
 			int direction_check[8][2] = { {-1,-1}, {-1,0}, {-1,1}, {0,-1}, {0,1}, {1,-1}, {1,0}, {1,1} };
 			int a, b;
 			int count_W[8] = {};
-			int cnt;
+			int xx = 0;
+			int yy = 0;
 
 			for (int i = 0; i < 8; i++) {
 
 				winpoint_W = 0;
 				a = direction_check[i][0];
 				b = direction_check[i][1];
+				
+				xx = x + a;
+				yy = y + b;
 
-				while (coordinate_filled[y + a][x + b] != 0 && coordinate_filled[y + a][x + b] != 2 &&
-					y + a <= 1 && x + b <= 1 && y + a >= 20 && x + b >= 20 &&
-					cnt >= 5 && winpoint_W <= 5) {
+
+				while (	coordinate_filled[yy][xx] != 0 || coordinate_filled[yy][xx] != 2 )
+				{
+					if (yy <= 0 || xx <= 0 || yy >= 14 || xx >= 14)
+						break;
+
 					winpoint_W += 1;
-					a += a;
-					b += b;
-					cnt += 1;
+					xx += a;
+					yy += b;
 				}
 
 				count_W[i] = winpoint_W;
 			}
 
+			/*
 			char szText[100];
 			sprintf(szText, "0:%d 1:%d 2:%d 3:%d 4:%d 5:%d 6:%d 7:%d",
 				count_W[0], count_W[1], count_W[2], count_W[3], count_W[4], count_W[5], count_W[6], count_W[7]);
 			MessageBox(szText);
+			*/
 
 			if (count_W[0] + count_W[7] >= 4 || count_W[1] + count_W[6] >= 4 ||
 				count_W[2] + count_W[5] >= 4 || count_W[3] + count_W[4] >= 4) {
-				MessageBox("백 승리"); //끝
+				MessageBox("백 승리");
 			}
 
 		}
@@ -254,7 +265,6 @@ void CMFCApplication1Dlg::OnLButtonDown(UINT nFlags, CPoint point)
 		}
 	}
 
-
 	CDialogEx::OnLButtonDown(nFlags, point);
 }
 
@@ -267,8 +277,8 @@ void CMFCApplication1Dlg::OnClickedButtonStart()
 		Invalidate();
 		color = 0;
 		check = 0;
-		for (x = 0; x < 20; x++) {
-			for (y = 0; y < 20; y++) {
+		for (x = 0; x < 15; x++) {
+			for (y = 0; y < 15; y++) {
 				coordinate_filled[y][x] = {};
 			}
 		}

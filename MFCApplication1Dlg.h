@@ -37,9 +37,8 @@ public:
 	int color = 1;
 	int on = 0;
 	int x, y;
-	int coordinate_filled[20][20] = {};
+	int coordinate_filled[15][15] = {};
 	int check = 0;
 	CDC * DCDefine();
-	int direction = 8;
 	int winpoint_W = 0, winpoint_B = 0;
 };
